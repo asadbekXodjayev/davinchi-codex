@@ -15,8 +15,23 @@ export interface Artwork {
   dimensions: string;
   location: string;
   imageUrl: string;
+  /** Short one-line lead shown under the title. */
+  tagline: string;
+  /** Brief summary used on cards and gallery tiles. */
   description: string;
+  /** Extended multi-paragraph narrative ("About this work"). */
+  about: string[];
+  /** Materials, methods and stylistic technique. */
+  technique: string;
+  /** Why the work matters — its legacy and influence. */
+  significance: string;
   historicalContext: string;
+  /** Quick trivia / notable details. */
+  facts: string[];
+  /** Subject/motif tags shown as chips. */
+  subjects: string[];
+  /** Representative colour palette (name + hex) drawn from the work. */
+  palette: { name: string; hex: string }[];
   category: "painting" | "drawing" | "manuscript" | "portrait";
 }
 
@@ -26,8 +41,24 @@ export interface Invention {
   name: string;
   year: number | string;
   category: "aeronautics" | "military" | "civilian" | "anatomical" | "architecture";
+  /** Short one-line lead shown under the title. */
+  tagline: string;
+  /** Brief summary used on cards and grid tiles. */
   description: string;
+  /** Extended multi-paragraph narrative ("About"). */
+  about: string[];
+  /** How the device was meant to operate. */
   explanation: string;
+  /** Construction and materials. */
+  materials: string;
+  /** How the idea echoes in modern technology. */
+  modernLegacy: string;
+  /** Why the design matters. */
+  significance: string;
+  /** Quick trivia / notable details. */
+  facts: string[];
+  /** Theme/motif tags shown as chips. */
+  subjects: string[];
   imageUrl: string;
   sketchUrl?: string;
 }

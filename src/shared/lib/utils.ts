@@ -46,7 +46,50 @@ export function generateSlug(text: string): string {
     .replace(/[^\w\s-]/g, "")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "")
     .trim();
+}
+
+/**
+ * Build an extremely detailed, fully descriptive slug for an artwork by
+ * folding every available structured field (title, year, category, medium,
+ * dimensions and location) into a single URL-friendly string.
+ * @param artwork - Artwork-like object with the descriptive fields
+ * @returns Detailed slug string
+ */
+export function buildArtworkSlug(artwork: {
+  title: string;
+  year: number | string;
+  category: string;
+  medium: string;
+  dimensions: string;
+  location: string;
+}): string {
+  return generateSlug(
+    [
+      artwork.title,
+      artwork.year,
+      artwork.category,
+      artwork.medium,
+      artwork.dimensions,
+      artwork.location,
+    ].join(" ")
+  );
+}
+
+/**
+ * Build an extremely detailed, fully descriptive slug for an invention by
+ * folding every available structured field (name, year and category) into a
+ * single URL-friendly string.
+ * @param invention - Invention-like object with the descriptive fields
+ * @returns Detailed slug string
+ */
+export function buildInventionSlug(invention: {
+  name: string;
+  year: number | string;
+  category: string;
+}): string {
+  return generateSlug([invention.name, invention.year, invention.category].join(" "));
 }
 
 /**

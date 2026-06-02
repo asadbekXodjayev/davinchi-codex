@@ -24,7 +24,7 @@ export function HeroSection() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            'url("https://commons.wikimedia.org/wiki/Special:FilePath/Da%20Vinci%20Vitruve%20Luc%20Viatour.jpg?width=1600")',
+            'url("https://commons.wikimedia.org/wiki/Special:FilePath/Da%20Vinci%20Vitruve%20Luc%20Viatour.jpg?width=2560")',
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

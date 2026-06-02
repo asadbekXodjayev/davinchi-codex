@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import { INVENTIONS, PLACEHOLDER_IMAGE } from "../../../shared/api/data";
 import { FadeIn } from "../../../shared/components/animations/FadeIn";
 import { Button } from "../../../shared/components/ui/button";
+import { ROUTES } from "../../../shared/lib/constants";
 import { staggerContainer, galleryItem } from "../../../shared/lib/animations";
 
 const GRAIN_SVG =
@@ -138,6 +140,11 @@ export function InnovationsGrid() {
               className="relative rounded-sm overflow-hidden group cursor-pointer flex flex-col"
               style={{ border: "1px solid #D4AF77", boxShadow: CARD_SHADOW, background: "#F5E8C7" }}
             >
+            <Link
+              href={ROUTES.innovation(invention.slug)}
+              className="flex flex-col flex-1"
+              aria-label={`View ${invention.name}`}
+            >
               {/* Corner ornaments */}
               <div className="absolute top-2 left-2 pointer-events-none z-20 text-gold-500 text-sm opacity-60">◈</div>
               <div className="absolute top-2 right-2 pointer-events-none z-20 text-gold-500 text-sm opacity-60 rotate-90">◈</div>
@@ -188,6 +195,7 @@ export function InnovationsGrid() {
                   <span>Learn more →</span>
                 </motion.div>
               </div>
+            </Link>
             </motion.div>
           ))}
         </motion.div>

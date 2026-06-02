@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import { ARTWORKS, PLACEHOLDER_IMAGE } from "../../../shared/api/data";
 import { FadeIn } from "../../../shared/components/animations/FadeIn";
 import { Button } from "../../../shared/components/ui/button";
+import { ROUTES } from "../../../shared/lib/constants";
 import { staggerContainer, galleryItem } from "../../../shared/lib/animations";
 
 const GRAIN_SVG =
@@ -133,6 +135,7 @@ export function GalleryView() {
               className="relative rounded-sm group cursor-pointer"
               style={{ border: "1px solid #D4AF77", boxShadow: CARD_SHADOW, background: "#F5E8C7" }}
             >
+            <Link href={ROUTES.artwork(artwork.slug)} className="block" aria-label={`View ${artwork.title}`}>
               {/* Corner ornaments */}
               <span className="absolute top-2 left-2 pointer-events-none z-20 text-gold-500 text-sm opacity-55 select-none">◈</span>
               <span className="absolute top-2 right-2 pointer-events-none z-20 text-gold-500 text-sm opacity-55 select-none rotate-90">◈</span>
@@ -181,6 +184,7 @@ export function GalleryView() {
                   <span className="truncate max-w-[130px] text-right">{artwork.location}</span>
                 </div>
               </div>
+            </Link>
             </motion.div>
           ))}
         </motion.div>

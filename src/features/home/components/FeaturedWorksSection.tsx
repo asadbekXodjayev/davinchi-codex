@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FadeIn } from "../../../shared/components/animations/FadeIn";
 import { Button } from "../../../shared/components/ui/button";
 import { ARTWORKS, PLACEHOLDER_IMAGE } from "../../../shared/api/data";
+import { ROUTES } from "../../../shared/lib/constants";
 import { staggerContainer, galleryItem } from "../../../shared/lib/animations";
 
 const GRAIN_SVG =
@@ -88,6 +89,7 @@ export function FeaturedWorksSection() {
               className="relative rounded-sm group cursor-pointer"
               style={{ border: "1px solid #D4AF77", boxShadow: CARD_SHADOW, background: "#F5E8C7" }}
             >
+            <Link href={ROUTES.artwork(artwork.slug)} className="block" aria-label={`View ${artwork.title}`}>
               {/* Corner ornaments */}
               <span className="absolute top-2 left-2 pointer-events-none z-20 text-gold-500 text-sm opacity-55 select-none">◈</span>
               <span className="absolute top-2 right-2 pointer-events-none z-20 text-gold-500 text-sm opacity-55 select-none rotate-90">◈</span>
@@ -128,17 +130,16 @@ export function FeaturedWorksSection() {
                 </p>
                 <div className="flex items-center justify-between border-t border-gold-300/40 pt-3">
                   <span className="font-garamond text-xs text-marble-500">{artwork.year}</span>
-                  <Link href="/artworks">
-                    <motion.span
-                      whileHover={{ x: 4 }}
-                      className="font-garamond text-sm cursor-pointer transition-all duration-200 hover:underline underline-offset-2"
-                      style={{ color: "#D4AF77" }}
-                    >
-                      Learn More →
-                    </motion.span>
-                  </Link>
+                  <motion.span
+                    whileHover={{ x: 4 }}
+                    className="font-garamond text-sm transition-all duration-200 group-hover:underline underline-offset-2"
+                    style={{ color: "#D4AF77" }}
+                  >
+                    Learn More →
+                  </motion.span>
                 </div>
               </div>
+            </Link>
             </motion.div>
           ))}
         </motion.div>

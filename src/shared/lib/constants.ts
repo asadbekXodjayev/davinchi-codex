@@ -24,6 +24,7 @@ export const ROUTES = {
   artworks: "/artworks",
   artwork: (slug: string) => `/artwork/${slug}`,
   innovations: "/innovations",
+  innovation: (slug: string) => `/innovation/${slug}`,
   biography: "/biography",
   legacy: "/legacy",
 };
