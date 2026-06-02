@@ -1,26 +1,386 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Renaissance Color Palette - Tailwind v4 @theme */
+@theme {
+  /* Exact color palette from specifications */
+  --color-gold-50: #FEF9F3;
+  --color-gold-100: #FDF3E3;
+  --color-gold-200: #FAE6C5;
+  --color-gold-300: #F6D29C;
+  --color-gold-400: #F1B668;
+  --color-gold-500: #D4AF77;  /* Primary Gold - Gold Leaf */
+  --color-gold-600: #B8925A;
+  --color-gold-700: #9A7642;
+  --color-gold-800: #7E5F35;
+  --color-gold-900: #664E2C;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-burgundy-50: #FDF6F6;
+  --color-burgundy-100: #F9E6E6;
+  --color-burgundy-200: #F3D0D0;
+  --color-burgundy-300: #E8B1B1;
+  --color-burgundy-400: #DC8989;
+  --color-burgundy-500: #5C2C2C;  /* Deep Burgundy - Accent */
+  --color-burgundy-600: #4A2323;
+  --color-burgundy-700: #3A1C1C;
+  --color-burgundy-800: #2E1717;
+  --color-burgundy-900: #251313;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-parchment-50: #FFFEFC;
+  --color-parchment-100: #F5E8C7;  /* Parchment / Ivory - MAIN BACKGROUND */
+  --color-parchment-200: #F0D9B5;
+  --color-parchment-300: #E8C77F;  /* Soft Glow / Hover */
+  --color-parchment-400: #D4B070;
+  --color-parchment-500: #C49A50;
+  --color-parchment-600: #A87A38;
+  --color-parchment-700: #895A28;
+  --color-parchment-800: #6A4220;
+  --color-parchment-900: #4A2E18;
+
+  --color-marble-50: #F5F5F5;
+  --color-marble-100: #E8E8E8;
+  --color-marble-200: #D4D4D4;
+  --color-marble-300: #B8B8B8;
+  --color-marble-400: #969696;
+  --color-marble-500: #737373;
+  --color-marble-600: #525252;
+  --color-marble-700: #404040;
+  --color-marble-800: #2C2416;  /* Warm dark brown (not black) */
+  --color-marble-900: #1C1814;
+
+  /* Accent colors */
+  --color-lapis-500: #264C7A;
+  --color-lapis-600: #1E3D61;
+  --color-lapis-700: #18304C;
+  --color-emerald-500: #2D5A3D;
+  --color-emerald-600: #244931;
+  --color-emerald-700: #1C3A26;
+
+  /* Fonts */
+  --font-family-cinzel: var(--font-cinzel), serif;
+  --font-family-playfair: var(--font-playfair), serif;
+  --font-family-garamond: var(--font-garamond), serif;
+
+  /* Shadows - Chiaroscuro lighting */
+  --shadow-gold: 0 0 20px rgba(212, 175, 119, 0.3);
+  --shadow-gold-strong: 0 0 30px rgba(212, 175, 119, 0.5), 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-ornate: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(212, 175, 119, 0.1);
+  --shadow-ink: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  /* Animations */
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-ken-burns: kenBurns 30s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes kenBurns {
+    0% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.08) translate(-1%, -1%); }
+    100% { transform: scale(1) translate(0, 0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base styles - WARM PARCHMENT BACKGROUND
+   NOTE: everything here lives in @layer base so Tailwind v4 utilities
+   (mx-auto, px-*, py-*, p-*, mb-*, etc.) — which live in @layer utilities —
+   can always override these element defaults. An UN-layered `* { margin:0 }`
+   would silently beat every spacing utility and break all centering/padding. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    background: var(--color-parchment-100);
+    color: var(--color-marble-800);
+    font-family: var(--font-family-garamond);
+    line-height: 1.8;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Parchment texture overlay for body */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF77' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Typography - Renaissance style with ink drop shadow */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-cinzel);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-shadow: var(--shadow-ink);
+    color: var(--color-marble-800);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  h4 {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+  }
+
+  p {
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Gold leaf effect with shimmer */
+.gold-leaf {
+  background: linear-gradient(135deg, #FEF9F3 0%, #F6D29C 25%, #D4AF77 50%, #F1B668 75%, #FDF3E3 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(212, 175, 119, 0.4));
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.gold-glow {
+  text-shadow: 0 0 20px rgba(212, 175, 119, 0.6), 0 0 40px rgba(212, 175, 119, 0.3);
+}
+
+/* Ornate border frame - multi-layer picture frame */
+.ornate-border {
+  position: relative;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--color-gold-600), var(--color-gold-400), var(--color-gold-600));
+  box-shadow: var(--shadow-ornate);
+}
+
+.ornate-border::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: linear-gradient(135deg, var(--color-gold-700), var(--color-gold-500), var(--color-gold-700));
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ornate-border::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-300), var(--color-gold-500));
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ornate-border > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Corner ornaments */
+.corner-ornament {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  color: var(--color-gold-500);
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+/* Drop cap - Illuminated letter */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-family-cinzel);
+  font-size: 4.5rem;
+  line-height: 0.8;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 0 var(--color-burgundy-500), 4px 4px 0 rgba(0, 0, 0, 0.3);
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+/* Ornate divider */
+.ornate-divider {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-gold-500) 50%, transparent 100%);
+  margin: 2rem 0;
+}
+
+.ornate-divider::before {
+  content: '❖';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-parchment-100);
+  padding: 0 1rem;
+  color: var(--color-gold-500);
+  font-size: 1.5rem;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-marble-900);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-parchment-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-gold-400), var(--color-gold-600));
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-gold-300), var(--color-gold-500));
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 2px;
+}
+
+/* Utility classes for full-screen sections */
+.full-screen {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Vignette effect for depth - subtle */
+.vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(106, 66, 32, 0.2) 100%);
+  pointer-events: none;
+}
+
+/* Glass morphism overlay - warm */
+.glass-overlay {
+  background: rgba(245, 232, 199, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 119, 0.4);
+  box-shadow: var(--shadow-card);
+}
+
+/* Card panel style */
+.card-panel {
+  background: linear-gradient(180deg, var(--color-parchment-50) 0%, var(--color-parchment-100) 100%);
+  border: 2px solid var(--color-gold-400);
+  box-shadow: var(--shadow-card);
+}
+
+/* Embossed gold effect */
+.embossed-gold {
+  background: linear-gradient(180deg, var(--color-gold-300) 0%, var(--color-gold-500) 50%, var(--color-gold-600) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   DROP CAP — Illuminated letter
+   ============================================= */
+
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-family-cinzel);
+  font-size: 4.5rem;
+  line-height: 0.8;
+  font-weight: 700;
+  color: #D4AF77;
+  text-shadow: 0 2px 10px rgba(212, 175, 119, 0.5);
+  margin: 0.05em 0.12em 0 0;
+}
+
+/* =============================================
+   SECTION GRAIN — inline noise, no external CDN
+   ============================================= */
+
+.section-grain {
+  position: relative;
+}
+
+.section-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content inside .section-grain must be z-10+ */
+
+/* =============================================
+   REDUCED MOTION — accessibility
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile — kill Ken Burns for perf & battery */
+@media (max-width: 767px) {
+  [data-ken-burns] {
+    animation: none !important;
+    transform: none !important;
+  }
 }
